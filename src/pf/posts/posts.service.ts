@@ -22,6 +22,21 @@ export class PostsService {
         //   }
         
         // En este ejemplo, debes reemplazar 'foreignKeyEntity' con el nombre de la relación de clave externa que deseas cargar en tu entidad Post osea el nombre de la foranea en el entity Post. Al pasar { relations: ['foreignKeyEntity'] } como opción en el método find(), le indicas a TypeORM que cargue la relación de clave externa especificada junto con tus entidades Post.
+        // async findPostsForId(id:number):  Promise<Post[]>
+        // {
+        // //    return this.postRepository.find();
+            
+        //     return this.postRepository.find({ relations: ['user'] });
+           
+        // }
+        async findPostsForUserId(userId:number):  Promise<Post[]>
+        {
+            
+            
+            return this.postRepository.find({ relations: ['user'], where: { user: { id: userId } } });
+            // return this.commentRepository.find({ relations: ['post'], where: { post: { id: post } } });
+               
+        }
         create(createPostDto:CreatePostDto){
             
             return this.postRepository.save(createPostDto)

@@ -17,6 +17,13 @@ export class CommentsService {
             return this.commentRepository.find({ relations: ['post','post.user'] });
            
         }
+        async findCommentForPostId(post:number):  Promise<Comment[]>
+        {
+            
+            // return this.commentRepository.find({ relations: ['post','post.user'] });
+            return this.commentRepository.find({ relations: ['post'], where: { post: { id: post } } });
+               
+        }
         // async showAll(): Promise<Post[]> {
         //     return this.postRepository.find({ relations: ['foreignKeyEntity'] });
         //   }

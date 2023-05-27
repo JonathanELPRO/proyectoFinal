@@ -10,7 +10,13 @@ export class PostsController {
     {
         return this.postService.showAll();
     }
-    
+    @Get(':id')
+    findPostsForUserId(
+        @Param('id',ParseIntPipe) id:number
+    )
+    {
+        return this.postService.findPostsForUserId(id);
+    }
     @Post()
     create(@Body() createPostDto:CreatePostDto) :object
     {

@@ -5,12 +5,19 @@ import { CreateCommentDto } from '../dto/create-comment.dto';
 @Controller('comments')
 export class CommentsController {
     constructor(private commentService: CommentsService){}
+
     @Get()
     findAll()
     {
         return this.commentService.showAll();
     }
-    
+    @Get(':id')
+    findCommentForPostId(
+        @Param('id',ParseIntPipe) id:number
+    )
+    {
+        return this.commentService.findCommentForPostId(id);
+    }
     @Post()
     create(@Body() createCommentDto:CreateCommentDto) :object
     {
